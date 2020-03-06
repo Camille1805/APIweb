@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?php echo URL_BASE.'/';?>">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="index.php?c=employee&m=listall">Employés</a>
+          <a class="nav-link" href="<?php echo URL_BASE.'/employee/listall';?>">Employés</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="index.php?c=employee&m=listmanagers">Managers</a>
+          <a class="nav-link" href="<?php echo URL_BASE.'/employee/listmanagers';?>">Managers</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="index.php?c=department&m=listall">Départements</a>
+          <a class="nav-link" href="<?php echo URL_BASE.'/department/listall';?>">Départements</a>
           </li>
       </ul>
     </div>

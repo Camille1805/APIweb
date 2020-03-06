@@ -7,37 +7,56 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');
 // =====================  Initialisation
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));
+define('URL_BASE', 'http://'.$_SERVER['SERVER_NAME'].(($_SERVER['SERVER_PORT'] == '80')?'':':'.$_SERVER['SERVER_PORT']).((dirname($_SERVER['SCRIPT_NAME']) == DS)?'':dirname($_SERVER['SCRIPT_NAME'])) );
 define('CONTROLLERS', ROOT.DS.'controllers');
 define('VIEWS', ROOT.DS.'views');
 define('MODELS', ROOT.DS.'models');
 define('VENDORS', ROOT.DS.'vendors');
 define('CLASSES', ROOT.DS.'classes');
 
-// =====================  Détermination du controleur à utiliser: Est-ce que j'ai un paramètre 'c' dans mon URL?
-if (isset($_GET['c'])){
-	//Il y a un paramètre de précisé: c'est le nom du controleur demandé.
-	$controller=strtolower(trim($_GET['c']));
+
+// =====================  Détermination du controleur à utiliser: Est-ce que j'ai un paramètre 'url' dans mon URL?
+if (isset($_GET['url'])){
+	//Il y a un paramètre de précisé.
+  $initialurl=isset($_GET['url'])?trim($_GET['url']):'';
+  //Nettoyage de l'url
+  if (substr($initialurl,-1) == '/')  $initialurl=substr($initialurl,0,-1);
+  if (substr($initialurl, 0,1) == '/')  $initialurl=substr($initialurl,1);
 }else{
-	//Pas de paramètre => le contrôleur par défaut est le contrôleur HOME
-	$controller='home';
+	//Pas de paramètre
+	$initialurl='';
 }
 
-// =====================  Détermination de la méthode à appeler: Est-ce que j'ai un paramètre 'm' dans mon URL?
-if (isset($_GET['m'])){
-		//Il y a un paramètre de précisé: c'est le nom de la méthode demandée.
-  $method=strtolower(trim($_GET['m']));
-}else{
-	//Pas de paramètre => la méthode par défaut est la méthode INDEX
-	$method='index';
-}
+$url = (!empty($initialurl)) ? explode('/', $initialurl) : array();
+//print_r($url); 0 controller, 1 method, other :parameters
+switch (count($url)) {
+  case 0:
+    $method='index';
+    $controller='home';
+    $id=null;
+    break;
+  case 1:
+    // Seul le Controller est fourni
+    $method='index';
+    $controller=ucfirst(strtolower($url[0]));
+    $id=null;
+    break;
 
-// =====================  Détermination de la id à utiliser: Est-ce que j'ai un paramètre 'id' dans mon URL?
-if (isset($_GET['id'])){
-  //Il y a un paramètre de précisé: c'est l'identifiant
-$id=strtolower(trim($_GET['id']));
-}else{
-//Pas de paramètre => la méthode par défaut est la méthode INDEX
-$id=null;
+  case 2:
+    // Controller + Method fournis
+    $controller=ucfirst(strtolower($url[0]));
+    $method=$url[1];
+    $id=null;
+    break;
+  case 3:
+      // Controller + Method + id fournis
+      $controller=ucfirst(strtolower($url[0]));
+      $method=$url[1];
+      $id=$url[2];
+      break;
+  default:
+    //plus de paramètres ... il faut décider quoi faire
+    break;
 }
 
 // =====================  Appel
