@@ -7,7 +7,7 @@ function fAge($date) {
   }  ?>
 <main role="main" class="container">
     <div class="starter-template">
-      <h1>Affichage d'un employé</h1>
+      <h1>Affichage d'un manager</h1>
     </div>
 
 <!--
@@ -57,7 +57,7 @@ object(stdClass)[6]
       <?php if (isset($e->MiddleName)) echo $e->MiddleName.' '; ?>
       <?php if (isset($e->LastName)) echo $e->LastName.' '; ?>
       <?php if (isset($e->Suffix)) echo $e->Suffix; ?>
-      <?php if (isset($e->EmployeeID)) echo ' <a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier l\'employé"><i class="fas fa-edit"></i> Modifier</a>';?>
+      <?php if (isset($e->EmployeeID)) echo ' <a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier le manager"><i class="fas fa-edit"></i> Modifier</a>';?>
     </h3>
   </div>
 
@@ -150,5 +150,51 @@ object(stdClass)[6]
       <?php if (isset($e->ModifiedDate)) echo $e->ModifiedDate; ?>
     </div>
   </div>
+
+  <?php if (isset($employeelist)) { ?>
+  <div class="row">
+    <br/><br/> <h4>Les employés qui sont sous la responsabilité de ce manager.</h4>
+    <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Contact #</th>
+        <th scope="col">National #</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Poste</th>
+        <th scope="col">Date Embauche</th>
+        <th scope="col">Mail</th>
+        <th scope="col"><i class="fas fa-eye"></i></th>
+        <th scope="col"><i class="fas fa-edit"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($employeelist as $e){ ?>
+      <tr>
+        <td><?php if (isset($e->EmployeeID)) echo $e->EmployeeID; ?></td>
+        <td><?php if (isset($e->ContactID)) echo $e->ContactID; ?></td>
+        <td><?php if (isset($e->NationalIDNumber)) echo $e->NationalIDNumber; ?></td>
+        <td><?php if (isset($e->CTitle)) echo $e->CTitle; ?></td>
+        <td><?php if (isset($e->LastName)) echo $e->LastName; ?></td>
+        <td><?php if (isset($e->FirstName)) echo $e->FirstName; ?></td>
+        <td><?php if (isset($e->ETitle)) echo $e->ETitle; ?></td>
+        <td><?php if (isset($e->HireDate)) echo date('d/m/Y',strtotime($e->HireDate)); ?></td>
+        <td><?php if (isset($e->EmailAddress)) echo $e->EmailAddress; ?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=view&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
+      </tr>
+    <?php }?>
+    </tbody>
+    </table>
+  </div>
+  <?php } else {?>
+    <div class="row">
+      Aucun employé sous responsabilité de ce manager !?.
+  </div>
+  <?php }?>
+
+
 
 </main><!-- /.container -->

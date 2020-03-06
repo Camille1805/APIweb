@@ -12,6 +12,12 @@
           <li class="nav-item">
           <a class="nav-link" href="index.php?c=employee&m=listall">Employés</a>
           </li>
+          <li class="nav-item">
+          <a class="nav-link" href="index.php?c=employee&m=listmanagers">Managers</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="index.php?c=department&m=listall">Départements</a>
+          </li>
       </ul>
     </div>
 </nav>
