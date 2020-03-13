@@ -49,9 +49,9 @@
         <td><?php if (isset($e->ETitle)) echo $e->ETitle; ?></td>
         <td><?php if (isset($e->HireDate)) echo date('d/m/Y',strtotime($e->HireDate)); ?></td>
         <td><?php if (isset($e->EmailAddress)) echo $e->EmailAddress; ?></td>
-        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=view&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
-        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
-        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=delete&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Supprimer" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="'.URL_BASE.'/employee/view/'.$e->EmployeeID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="'.URL_BASE.'/employee/edit/'.$e->EmployeeID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="'.URL_BASE.'/employee/delete/'.$e->EmployeeID.'" data-toggle="tooltip" title="Supprimer" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>';?></td>
       </tr>
     <?php }?>
     </tbody>

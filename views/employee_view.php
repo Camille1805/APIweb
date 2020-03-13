@@ -57,7 +57,7 @@ object(stdClass)[6]
       <?php if (isset($e->MiddleName)) echo $e->MiddleName.' '; ?>
       <?php if (isset($e->LastName)) echo $e->LastName.' '; ?>
       <?php if (isset($e->Suffix)) echo $e->Suffix; ?>
-      <?php if (isset($e->EmployeeID)) echo ' <a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier l\'employé"><i class="fas fa-edit"></i> Modifier</a>';?>
+      <?php if (isset($e->EmployeeID)) echo ' <a href="'.URL_BASE.'/employee/edit/'.$e->EmployeeID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier l\'employé"><i class="fas fa-edit"></i> Modifier</a>';?>
     </h3>
   </div>
 
@@ -141,7 +141,7 @@ object(stdClass)[6]
       <?php if (isset($e->CMMiddleName)) echo ' '.$e->CMMiddleName; ?>
       <?php if (isset($e->CMLastName)) echo ' '.$e->CMLastName; ?>
       <?php if (isset($e->EMTitle)) echo ' ('.$e->EMTitle.')'; ?>
-      <?php if (isset($e->ManagerID)) echo ' <a href="index.php?c=employee&m=viewmanager&id='.$e->ManagerID.'" class="btn btn-success btn-sm" data-toggle="tooltip" title="Voir le manager"><i class="fas fa-eye"></i> Voir le manager</a>';?>
+      <?php if (isset($e->ManagerID)) echo ' <a href="'.URL_BASE.'/employee/viewmanager/'.$e->ManagerID.'" class="btn btn-success btn-sm" data-toggle="tooltip" title="Voir le manager"><i class="fas fa-eye"></i> Voir le manager</a>';?>
     </div>
   </div>
   <div class="row">

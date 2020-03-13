@@ -23,7 +23,7 @@ object(stdClass)[6]
     <h3>
       <?php if (isset($d->DepartmentID)) echo '('.$d->DepartmentID.') '; ?>
       <?php if (isset($d->Name)) echo $d->Name.' '; ?>
-      <?php if (isset($d->DepartmentID)) echo ' <a href="index.php?c=department&m=edit&id='.$d->DepartmentID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier le département"><i class="fas fa-edit"></i> Modifier</a>';?>
+      <?php if (isset($d->DepartmentID)) echo ' <a href="'.URL_BASE.'/department/edit/'.$d->DepartmentID.'" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modifier le département"><i class="fas fa-edit"></i> Modifier</a>';?>
     </h3>
   </div>
 
@@ -71,8 +71,8 @@ object(stdClass)[6]
         <td><?php if (isset($e->ETitle)) echo $e->ETitle; ?></td>
         <td><?php if (isset($e->HireDate)) echo date('d/m/Y',strtotime($e->HireDate)); ?></td>
         <td><?php if (isset($e->EmailAddress)) echo $e->EmailAddress; ?></td>
-        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=view&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
-        <td><?php if (isset($e->EmployeeID)) echo '<a href="index.php?c=employee&m=edit&id='.$e->EmployeeID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="'.URL_BASE.'/employee/view/'.$e->EmployeeID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
+        <td><?php if (isset($e->EmployeeID)) echo '<a href="'.URL_BASE.'/employee/edit/'.$e->EmployeeID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
       </tr>
     <?php }?>
     </tbody>

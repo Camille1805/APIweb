@@ -31,9 +31,9 @@
         <td><?php if (isset($d->DepartmentID)) echo $d->DepartmentID; ?></td>
         <td><?php if (isset($d->Name)) echo $d->Name; ?></td>
         <td><?php if (isset($d->GroupName)) echo $d->GroupName; ?></td>
-        <td><?php if (isset($d->DepartmentID)) echo '<a href="index.php?c=department&m=view&id='.$d->DepartmentID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
-        <td><?php if (isset($d->DepartmentID)) echo '<a href="index.php?c=department&m=edit&id='.$d->DepartmentID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
-        <td><?php if (isset($d->DepartmentID)) echo '<a href="index.php?c=department&m=delete&id='.$d->DepartmentID.'" data-toggle="tooltip" title="Supprimer" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>';?></td>
+        <td><?php if (isset($d->DepartmentID)) echo '<a href="'.URL_BASE.'/department/view/'.$d->DepartmentID.'" data-toggle="tooltip" title="Voir" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';?></td>
+        <td><?php if (isset($d->DepartmentID)) echo '<a href="'.URL_BASE.'/department/edit/'.$d->DepartmentID.'" data-toggle="tooltip" title="Modifier" class="btn btn-warning  btn-sm"><i class="fas fa-edit"></i></a>';?></td>
+        <td><?php if (isset($d->DepartmentID)) echo '<a href="'.URL_BASE.'/department/delete/'.$d->DepartmentID.'" data-toggle="tooltip" title="Supprimer" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>';?></td>
       </tr>
     <?php }?>
     </tbody>
