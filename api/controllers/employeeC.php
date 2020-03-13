@@ -12,26 +12,31 @@ class EmployeeController {
       // Affichage au sein de la vue des données récupérées via le model
       require_once CLASSES.DS.'view.php';
       $v=new View();
-      $v->setVar('employeelist',$employees);
-      $v->render('employee','listall');
+      $v->setVar('data',$employees);
+      $v->renderjson(200);
     }
     public function view($id=null){
       require_once MODELS.DS.'employeeM.php';
       $m=New EmployeeModel();
       require_once CLASSES.DS.'view.php';
       $v=new View();
-      if ($employee=$m->listOne($id)) $v->setVar('e',$employee);
+      if ($employee=$m->listOne($id)) $v->setVar('data',$employee);
       // Affichage au sein de la vue des données récupérées via le model
-      $v->render('employee','view');
+      $v->renderjson(200);
     }
     public function edit($id=null){
-      die('modification d\'un employé');
+      require_once CLASSES.DS.'view.php';
+      $v=new View();
+      $v->setVar('data',array('ErrorMessage'=>'501 - EDIT function Not implemented'));
+      $v->renderjson(501);
     }
     public function delete($id=null){
       require_once MODELS.DS.'employeeM.php';
       $m=New EmployeeModel();
       $m->delete($id);
-      $this->listall();
+      $v=new View();
+      $v->setVar('data',array('ID'=>$id));
+      $v->renderjson(200);
     }
     public function listmanagers(){
       require_once MODELS.DS.'employeeM.php';

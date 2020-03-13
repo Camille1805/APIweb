@@ -13,8 +13,8 @@ class DepartmentController {
       // Affichage au sein de la vue des données récupérées via le model
       require_once CLASSES.DS.'view.php';
       $v=new View();
-      $v->setVar('departmentlist',$departments);
-      $v->render('department','listall');
+      $v->setVar('data',$departments);
+      $v->renderjson(200);
     }
     public function view($id=null){
       require_once MODELS.DS.'departmentM.php';
@@ -23,16 +23,22 @@ class DepartmentController {
       $e=New EmployeeModel();
       require_once CLASSES.DS.'view.php';
       $v=new View();
-      if ($department=$m->listOne($id)) $v->setVar('d',$department);
-      if ($employees=$e->listAllFromDepartment($id)) $v->setVar('employeelist',$employees);
+      if ($department=$m->listOne($id)) $v->setVar('data',$department);
+      //if ($employees=$e->listAllFromDepartment($id)) $v->setVar('employeelist',$employees);
       // Affichage au sein de la vue des données récupérées via le model
-      $v->render('department','view');
+      $v->renderjson(200);
     }
     public function edit($id=null){
-      die('modification d\'un département');
+      require_once CLASSES.DS.'view.php';
+      $v=new View();
+      $v->setVar('data',array('ErrorMessage'=>'501 - EDIT function Not implemented'));
+      $v->renderjson(501);
     }
     public function delete($id=null){
-      die('suppression d\'un département');
+      require_once CLASSES.DS.'view.php';
+      $v=new View();
+      $v->setVar('data',array('ErrorMessage'=>'501 - EDIT function Not implemented'));
+      $v->renderjson(501);
     }
 
 }

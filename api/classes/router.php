@@ -7,48 +7,66 @@ class Router {
     public function __construct(){
     }
     public function url(){
-        if (isset($_GET['url'])){
-            //Il y a un paramètre de précisé.
-          $initialurl=isset($_GET['url'])?trim($_GET['url']):'';
-          //Nettoyage de l'url
-          if (substr($initialurl,-1) == '/')  $initialurl=substr($initialurl,0,-1);
-          if (substr($initialurl, 0,1) == '/')  $initialurl=substr($initialurl,1);
-        }else{
-            //Pas de paramètre
-            $initialurl='';
-        }
-        
-        $url = (!empty($initialurl)) ? explode('/', $initialurl) : array();
-        //print_r($url); 0 controller, 1 method, other :parameters
-        switch (count($url)) {
-          case 0:
-            $this->method='index';
-            $this->controller='home';
+      $requestmethod=$_SERVER['REQUEST_METHOD'];
+      $initialuri=$_SERVER['REQUEST_URI'];
+      if (substr($initialuri,-1) == '/')  $initialuri=substr($initialuri,0,-1);
+      $scriptname=$_SERVER['SCRIPT_NAME'];
+      $dirscriptname=dirname($scriptname);
+      $lensn=strlen($dirscriptname);
+      $requesteduri=(substr($scriptname,0,$lensn) == $dirscriptname)?substr($initialuri,(strlen($initialuri)-$lensn-1)*-1):'';
+
+      if (substr($requesteduri,-1) == '/')  $requesteduri=substr($requesteduri,0,-1);
+      if (substr($requesteduri, 0,1) == '/')  $requesteduri=substr($requesteduri,1);
+
+      if ($initialuri == $dirscriptname) $requesteduri='';
+      $uri = (!empty($requesteduri)) ? explode('/', $requesteduri) : array();
+      //print_r($url); 0 controller, 1 method, other :parameters
+      switch (count($uri)) {
+        case 0:
+          $this->method='e404';
+          $this->controller='error';
+          $this->id=null;
+          break;
+        case 1:
+          // Seul le Controller est fourni
+          //On vérifie que la méthode est bien un GET
+          if ($requestmethod == 'GET'){
+            $this->method='listall';
+            $this->controller=ucfirst(strtolower($uri[0]));
             $this->id=null;
-            break;
-          case 1:
-            // Seul le Controller est fourni
-            $this->method='index';
-            $this->controller=ucfirst(strtolower($url[0]));
+          }else{
+            $this->method='400'; //bad request
+            $this->controller='error';
             $this->id=null;
-            break;
-        
-          case 2:
-            // Controller + Method fournis
-            $this->controller=ucfirst(strtolower($url[0]));
-            $this->method=$url[1];
-            $this->id=null;
-            break;
-          case 3:
-              // Controller + Method + id fournis
-              $this->controller=ucfirst(strtolower($url[0]));
-              $this->method=$url[1];
-              $this->id=$url[2];
+          }
+          break;
+        case 2:
+          // Controller + id fournis
+          $this->controller=ucfirst(strtolower($uri[0]));
+          $this->id=$uri[1];
+          switch ($requestmethod) {
+            case 'GET':
+              $this->method='view';
               break;
-          default:
-            //plus de paramètres ... il faut décider quoi faire
-            break;
-        }
+            case 'DELETE':
+              $this->method='delete';
+              break;
+            case 'PUT':
+              $this->method='edit';
+              break;
+            case 'POST':
+              $this->method='add';
+              break;
+            default:
+              //décider quel traitement faire lorsque le verbe HTTP n'est pas connu
+              break;
+          }
+
+          break;
+        default:
+          //plus de paramètres ... il faut décider quoi faire
+          break;
+      }
     }
     public function exec(){
         // =====================  Appel
