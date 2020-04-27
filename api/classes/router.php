@@ -69,20 +69,20 @@ class Router {
     }
   }
   public function exec(){
-      // =====================  Appel
-      //On construit le nom du fichier qui contient le contrôleur appelé (ou le contrôleur par défaut)
-      $this->controllerfilename=$this->controller.'C.php';
-      //On inclut les fichiers nécessaires
-      include CONTROLLERS.DS.$this->controllerfilename;
-      //On construit le nom de la classe que l'on va instancier
-      $this->controllerclassname=ucfirst($this->controller).'Controller';
-      //On instancie cette classe
-      $c=new $this->controllerclassname();
-      //On appelle la méthode demandée (ou la méthode par défaut)
-      $m=$this->method;
-      if (!is_null($this->id))
-          $c->$m($this->id);
-      else
-          $c->$m();
+    // =====================  Appel
+    //On construit le nom du fichier qui contient le contrôleur appelé (ou le contrôleur par défaut)
+    $this->controllerfilename=$this->controller.'C.php';
+    //On inclut les fichiers nécessaires
+    include CONTROLLERS.DS.$this->controllerfilename;
+    //On construit le nom de la classe que l'on va instancier
+    $this->controllerclassname=ucfirst($this->controller).'Controller';
+    //On instancie cette classe
+    $c=new $this->controllerclassname();
+    //On appelle la méthode demandée (ou la méthode par défaut)
+    $m=$this->method;
+    if (!is_null($this->id))
+        $c->$m($this->id);
+    else
+        $c->$m();
   }
 }
