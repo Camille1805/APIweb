@@ -37,7 +37,7 @@ class DepartmentController {
   public function delete($id=null){
     require_once CLASSES.DS.'view.php';
     $v=new View();
-    $v->setVar('data',array('ErrorMessage'=>'501 - EDIT function Not implemented'));
+    $v->setVar('data',array('ErrorMessage'=>'501 - DELETE function Not implemented'));
     $v->renderjson(501);
   }
 
