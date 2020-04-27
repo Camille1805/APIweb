@@ -1,26 +1,26 @@
 <?php
-class EmployeeController {
+class ManagerController {
   public function construct(){}
 
   public function index() {
     $this->listall();
   }
   public function listall(){
-    require_once MODELS.DS.'employeeM.php';
-    $m=New EmployeeModel();
-    $employees=$m->listAll();
+    require_once MODELS.DS.'managerM.php';
+    $m=New managerl();
+    $managers=$m->listAll();
     // Affichage au sein de la vue des données récupérées via le model
     require_once CLASSES.DS.'view.php';
     $v=new View();
-    $v->setVar('data',$employees);
+    $v->setVar('data',$managers);
     $v->renderjson(200);
   }
   public function view($id=null){
-    require_once MODELS.DS.'employeeM.php';
-    $m=New EmployeeModel();
+    require_once MODELS.DS.'managerM.php';
+    $m=New managerl();
     require_once CLASSES.DS.'view.php';
     $v=new View();
-    if ($employee=$m->listOne($id)) $v->setVar('data',$employee);
+    if ($manager=$m->listOne($id)) $v->setVar('data',$manager);
     // Affichage au sein de la vue des données récupérées via le model
     $v->renderjson(200);
   }
@@ -31,8 +31,8 @@ class EmployeeController {
     $v->renderjson(501);
   }
   public function delete($id=null){
-    require_once MODELS.DS.'employeeM.php';
-    $m=New EmployeeModel();
+    require_once MODELS.DS.'managerM.php';
+    $m=New managerl();
     $m->delete($id);
     $v=new View();
     $v->setVar('data',array('ID'=>$id));
