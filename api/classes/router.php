@@ -35,7 +35,7 @@ class Router {
           $this->controller=ucfirst(strtolower($uri[0]));
           $this->id=null;
         }else{
-          $this->method='400'; //bad request
+          $this->method='e400'; //bad request
           $this->controller='error';
           $this->id=null;
         }
