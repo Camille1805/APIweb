@@ -13,7 +13,7 @@ define('VIEWS', ROOT.DS.'views');
 define('MODELS', ROOT.DS.'models');
 define('VENDORS', ROOT.DS.'vendors');
 define('CLASSES', ROOT.DS.'classes');
-
+define('URL_APIBASE','http://localhost/projects/uha/2020/tds/uha_archiweb_2020/api');
 
 // =====================  Détermination du controleur à utiliser: Est-ce que j'ai un paramètre 'url' dans mon URL?
 require_once CLASSES.DS.'router.php';
