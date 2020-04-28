@@ -1,8 +1,8 @@
 <?php
+require_once CLASSES.DS.'RestCurlClient.php';
 class VendorModel {
   public function construct(){}
   public function listAll(){
-    require_once CLASSES.DS.'RestCurlClient.php';
     $api=New RestCurlClient();
     try {
       set_time_limit(0);
@@ -15,11 +15,10 @@ class VendorModel {
     }
   }
   public function listOne($id){
-    require_once CLASSES.DS.'RestCurlClient.php';
     $api=New RestCurlClient();
     try {
       set_time_limit(0);
-      $response=$api->get(URL_APIBASE.'/vendor'.$id);
+      $response=$api->get(URL_APIBASE.'/vendor/'.$id);
       if ($response) return $response;
       else return false;
     } catch (Exception $e) {
