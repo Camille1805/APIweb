@@ -21,6 +21,9 @@
       <li class="nav-item">
         <a class="nav-link" href="<?php echo URL_BASE.'/vendor/listall';?>">Fournisseurs</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo URL_BASE.'/employeedeux/listall';?>">Employee2</a>
+      </li>
     </ul>
   </div>
 </nav>

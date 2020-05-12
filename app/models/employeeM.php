@@ -1,5 +1,7 @@
 <?php
 require_once CLASSES.DS.'modelpdo.php';
+require_once CLASSES.DS.'RestCurlClient.php';
+
 class EmployeeModel extends ModelPDO{
   public function construct(){}
   public function listAll(){
@@ -9,18 +11,30 @@ class EmployeeModel extends ModelPDO{
     where E.CurrentFlag<>0';
     return $this->select($sql);
   }
+  // public function listOne($id){
+  //   $sql='select E.*, C.*,E.Title as ETitle, C.Title as CTitle, EM.Title as EMTitle, CM.Title as CMTitle, CM.FirstName as CMFirstName, CM.MiddleName as CMMiddleName, CM.LastName as CMLastName
+  //   from employee as E
+  //   inner join contact as C on E.ContactID=C.ContactID
+  //   left join employee as EM on E.ManagerID=EM.EmployeeID
+  //   left join contact as CM on EM.ContactID=CM.ContactID
+  //   where E.CurrentFlag<>0
+  //   and E.EmployeeID=:id';
+  //   $p=array(
+  //     ':id'   => array('value'=>$id, 'type'=>PDO::PARAM_INT)
+  //   );
+  //   return current($this->select($sql,$p));
+  // }
   public function listOne($id){
-    $sql='select E.*, C.*,E.Title as ETitle, C.Title as CTitle, EM.Title as EMTitle, CM.Title as CMTitle, CM.FirstName as CMFirstName, CM.MiddleName as CMMiddleName, CM.LastName as CMLastName
-    from employee as E
-    inner join contact as C on E.ContactID=C.ContactID
-    left join employee as EM on E.ManagerID=EM.EmployeeID
-    left join contact as CM on EM.ContactID=CM.ContactID
-    where E.CurrentFlag<>0
-    and E.EmployeeID=:id';
-    $p=array(
-      ':id'   => array('value'=>$id, 'type'=>PDO::PARAM_INT)
-    );
-    return current($this->select($sql,$p));
+    $api=New RestCurlClient();
+    try {
+      set_time_limit(0);
+      $response=$api->get(URL_APIBASE.'/employee/'.$id);
+      if ($response) return $response;
+      else return false;
+    } catch (Exception $e) {
+      //Que fait-on en fonction du code erreur?  #TODO#
+      return false;
+    }
   }
   public function listAllFromDepartment($id){
     $sql='select E.EmployeeID, C.ContactID, E.NationalIDNumber,E.Title as ETitle, C.Title as CTitle, C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, E.HireDate

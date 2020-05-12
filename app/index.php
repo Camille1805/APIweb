@@ -14,7 +14,7 @@ define('MODELS', ROOT.DS.'models');
 define('VENDORS', ROOT.DS.'vendors');
 define('CLASSES', ROOT.DS.'classes');
 
-define('URL_APIBASE','http://localhost/projects/uha/2020/tds/uha_archiweb_2020/api');
+define('URL_APIBASE','127.0.0.1/camillebalmerExamen/api');
 
 define('DB_HOST', 'localhost');
 define('DB_DBNAME', 'adwfull');
@@ -22,7 +22,6 @@ define('DB_CHARSET', 'utf8');
 define('DB_DSN', 'mysql:host='.DB_HOST.';dbname='.DB_DBNAME.';charset='.DB_CHARSET);
 define('DB_USERNAME', 'root');
 define('DB_USERPWD', '');
-
 // =====================  Détermination du controleur à utiliser: Est-ce que j'ai un paramètre 'url' dans mon URL?
 require_once CLASSES.DS.'router.php';
 $r = new Router();

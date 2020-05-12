@@ -13,5 +13,6 @@ class DepartmentModel extends ModelPDO {
     );
     return(current($this->select($sql,$p)));
   }
+
 }
 ?>

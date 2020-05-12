@@ -9,14 +9,27 @@ class EmployeeModel extends ModelPDO{
     where E.CurrentFlag<>0';
     return $this->select($sql);
   }
+  // public function listOne($id){
+  //   $sql='select E.*, C.*,E.Title as ETitle, C.Title as CTitle, EM.Title as EMTitle, CM.Title as CMTitle, CM.FirstName as CMFirstName, CM.MiddleName as CMMiddleName, CM.LastName as CMLastName
+  //   from employee as E
+  //   inner join contact as C on E.ContactID=C.ContactID
+  //   left join employee as EM on E.ManagerID=EM.EmployeeID
+  //   left join contact as CM on EM.ContactID=CM.ContactID
+  //   where E.CurrentFlag<>0
+  //   and E.EmployeeID=:id';
+  
+  //   $p=array(
+  //     ':id'   => array('value'=>$id, 'type'=>PDO::PARAM_INT)
+  //   );
+  //   return current($this->select($sql,$p));
+  // }
   public function listOne($id){
-    $sql='select E.*, C.*,E.Title as ETitle, C.Title as CTitle, EM.Title as EMTitle, CM.Title as CMTitle, CM.FirstName as CMFirstName, CM.MiddleName as CMMiddleName, CM.LastName as CMLastName
+    $sql='select E.EmployeeID, C.ContactID, E.NationalIDNumber,E.Title as ETitle, C.Title as CTitle, C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, E.HireDate
     from employee as E
     inner join contact as C on E.ContactID=C.ContactID
-    left join employee as EM on E.ManagerID=EM.EmployeeID
-    left join contact as CM on EM.ContactID=CM.ContactID
     where E.CurrentFlag<>0
     and E.EmployeeID=:id';
+  
     $p=array(
       ':id'   => array('value'=>$id, 'type'=>PDO::PARAM_INT)
     );

@@ -19,6 +19,7 @@ class EmployeeController {
   public function view($id=null){
     $m=New EmployeeModel();
     $v=new View();
+    echo $id;
     if ($employee=$m->listOne($id)) $v->setVar('e',$employee);
     // Affichage au sein de la vue des données récupérées via le model
     $v->render('employee','view');
